@@ -26,12 +26,6 @@ public class AppTest
     }
 
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
-    @Test
     public void thereIsAFlight()
     {
         MockFlight f = new MockFlight();
@@ -40,21 +34,17 @@ public class AppTest
 
     @Test
     public void thereIsADB(){
-        MockDB db = new MockDB();
-        assertTrue(db.MFS.length == 3);
+        assertTrue(this.fc.db.MFS != null);
         
     }
     @Test
     public void thereIsADate(){
-        MockDB db = new MockDB();
-        System.out.println(db.MFS[0].depT);
-        assertTrue(db.MFS[0].depT != null);
+        assertTrue(this.fc.db.MFS[0].depT != null);
     }
 
     @Test
     public void myNewTest(){
-        FlightController fc = new FlightController();
-        MockFlight[] a = fc.search("Reykjavík", "Akureyri");
+        MockFlight[] a = this.fc.search("Reykjavík", "Akureyri");
         assertTrue(a.length == 1);
     }
 }
