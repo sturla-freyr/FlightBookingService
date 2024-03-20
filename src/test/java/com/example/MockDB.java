@@ -16,6 +16,10 @@ public class MockDB implements FlightDatabase{
         this.MFS[2] = f3;
     }
 
+    public Flight[] getFlights(){
+        return this.MFS;
+    }
+    
     public Flight[] getFlightsFromTo(String from, String to){
         List<Flight> matchingFlights = new ArrayList<>();
         if(from != null && to != null){
@@ -28,7 +32,4 @@ public class MockDB implements FlightDatabase{
         return matchingFlights.toArray(new Flight[0]);
     }
 
-    public Flight[] getFlights(){
-        return this.MFS;
-    }
 }
