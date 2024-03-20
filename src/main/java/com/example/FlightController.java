@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FlightController {
 
     public FlightDatabase db;
@@ -13,7 +16,7 @@ public class FlightController {
     }*/
 
     public Flight[] search(String depLoc, String destLoc){
-        return db.getFlightsFromTo(depLoc, destLoc);
+        return getFlightsFromTo(depLoc, destLoc);
     }
 /* 
     public MockFlight[] search(String depLoc, Date depTime){
@@ -24,4 +27,15 @@ public class FlightController {
         return db.query(depLoc, destLoc, depTime);
     }*/
 
+    public Flight[] getFlightsFromTo(String from, String to){
+        List<Flight> matchingFlights = new ArrayList<>();
+        if(from != null && to != null){
+            for (Flight flight : this.db.getFlights()) {
+                if (flight.dep.equals(from) && flight.arr.equals(to)) {
+                    matchingFlights.add(flight);
+                }
+            }
+        }
+        return matchingFlights.toArray(new Flight[0]);
+    }
 }
