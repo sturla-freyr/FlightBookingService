@@ -2,17 +2,17 @@ package com.example;
 
 public class FlightController {
 
-    MockDB db;
+    public FlightDatabase db;
 
-    public FlightController() {
-        db = new MockDB();
+    public FlightController(FlightDatabase db) {
+        this.db = db;
     }
 
     /*public MockFlight[] search() {
         return db.emptyQuery();
     }*/
 
-    public MockFlight[] search(String depLoc, String destLoc){
+    public Flight[] search(String depLoc, String destLoc){
         return db.getFlightsFromTo(depLoc, destLoc);
     }
 /* 
