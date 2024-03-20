@@ -2,32 +2,36 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class FlightController {
 
-    public FlightDatabase db;
+    private FlightDatabase db;
 
     public FlightController(FlightDatabase db) {
         this.db = db;
     }
 
-    /*public MockFlight[] search() {
-        return db.emptyQuery();
-    }*/
+    public Flight[] search() {
+        return getFlights();
+    }
 
     public Flight[] search(String depLoc, String destLoc){
         return getFlightsFromTo(depLoc, destLoc);
     }
-/* 
-    public MockFlight[] search(String depLoc, Date depTime){
-        return db.query(depLoc, depTime);
+
+    public Flight[] search(String depLoc, Date depTime){
+        return getFlightsLocAndTime(depLoc, depTime);
     }
 
-    public MockFlight[] search(String depLoc, String destLoc, Date depTime){
-        return db.query(depLoc, destLoc, depTime);
-    }*/
+    public Flight[] search(String depLoc, String destLoc, Date depTime){
+        return getFlightsDepDestTime(depLoc, destLoc, depTime);
+    }
 
-    public Flight[] getFlightsFromTo(String from, String to){
+    private Flight[] getFlights(){
+        return db.getFlights();
+    }
+    private Flight[] getFlightsFromTo(String from, String to){
         List<Flight> matchingFlights = new ArrayList<>();
         if(from != null && to != null){
             for (Flight flight : this.db.getFlights()) {
@@ -37,5 +41,13 @@ public class FlightController {
             }
         }
         return matchingFlights.toArray(new Flight[0]);
+    }
+
+    private Flight[] getFlightsLocAndTime(String from, Date depTime){
+        return null;
+    }
+
+    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime){
+        return null;
     }
 }

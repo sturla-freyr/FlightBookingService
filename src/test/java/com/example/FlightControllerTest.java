@@ -22,39 +22,61 @@ public class FlightControllerTest {
     }
 
     @Test
-    public void thereIsAFlight()
+    public void testSearch()
     {
-        Flight f = new Flight();
-        assertTrue(f.arr == "Akureyri");
+        assertTrue(fc.search() != null);
     }
 
     @Test
-    public void thereIsADB(){
-        assertTrue(this.fc.db != null);
-        
+    public void testSearch2()
+    {
+        assertTrue(fc.search("Reykjavík", "Akureyri") != null);
     }
 
     @Test
-    public void thereIsADate(){
-        Flight[] f = fc.db.getFlights();
+    public void testSearch3()
+    {
+        assertTrue(fc.search("Reykjavík", new Date()) != null);
+    }
+
+    @Test
+    public void testSearch4()
+    {
+        assertTrue(fc.search("Reykjavík", "Akureyri", new Date()) != null);
+    }
+
+    @Test
+    public void thereIsADepTime(){
+        Flight[] f = fc.search();
         Date d = f[0].depT;
         assertTrue(d != null);
     }
 
     @Test
-    public void testSearch(){
-        Flight[] fa = this.fc.search("Reykjavík", "Akureyri");
-        assertTrue(fa.length == 1);
+    public void thereIsAArrTime(){
+        Flight[] f = fc.search();
+        Date d = f[0].arrT;
+        assertTrue(d != null);
     }
 
     @Test
-    public void testGetDep(){
-        Flight[] fa = this.fc.search("Reykjavík", "Akureyri");
-        assertTrue(fa[0].getDep() == "Reykjavík");
+    public void thereIsADepLoc(){
+        Flight[] f = fc.search();
+        String d = f[0].dep;
+        assertEquals("Reykjavík", d);
     }
+
     @Test
-    public void testGetArr(){
-        Flight[] fa = this.fc.search("Reykjavík", "Akureyri");
-        assertTrue(fa[0].getArr() == "Akureyri");
+    public void thereIsAArrLoc(){
+        Flight[] f = fc.search();
+        String d = f[0].arr;
+        assertEquals("Akureyri", d);
+    }
+
+    @Test
+    public void thereAreSeats(){
+        Flight[] f = fc.search();
+        Integer s = f[0].seats;
+        assertTrue(s != null);
     }
 }
