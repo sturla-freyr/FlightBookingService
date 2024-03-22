@@ -107,4 +107,32 @@ public class FlightControllerTest {
         Integer s = f[0].seats;
         assertTrue(s != null);
     }
+
+    @Test
+    public void canAddNewFlights(){
+        String dep = "Amsterdam";
+        String arr = "Rotterdam";
+        fc.addFlight(new Flight(dep, arr));
+        
+        Flight[] results = fc.search(dep, arr);
+        
+        boolean found = false;
+        for (Flight flight : results) {
+            if (dep.equals(flight.getDep()) && arr.equals(flight.getArr())) {
+                found = true;
+                break; // Exit the loop early since we've found what we were looking for
+            }
+        }
+        assertTrue(found, "The added flight should be in the search results");
+    }
+
+    @Test
+    public void canDeleteAFlight(){
+        assertTrue(false);
+    }
+
+    @Test
+    public void canUpdateFlight(){
+        assertTrue(false);
+    }
 }

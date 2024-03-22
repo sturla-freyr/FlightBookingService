@@ -50,4 +50,8 @@ public class FlightController {
     private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime){
         return getFlights();
     }
+
+    public void addFlight(Flight f){};
+    public void deleteFlight(Flight f){};
+    public void changeFlight(){};
 }

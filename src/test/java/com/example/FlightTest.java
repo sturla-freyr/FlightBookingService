@@ -9,7 +9,7 @@ public class FlightTest {
 
     @BeforeEach
     void setUp(){
-        this .testFlight = new Flight("Amsterdam", "Rotterdam", 5);
+        this.testFlight = new Flight("Amsterdam", "Rotterdam", 5);
     }
 
     @AfterEach
