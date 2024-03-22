@@ -2,9 +2,6 @@ package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.*;
 import java.util.Date;
 
@@ -24,25 +21,56 @@ public class FlightControllerTest {
     @Test
     public void testSearch()
     {
-        assertTrue(fc.search() != null);
+        Flight[] result = fc.search();
+        assertNotNull(result, "Search result should not be null");
+        assertTrue(result.length > 0, "Search result should not be empty");
+
+        for (Flight flight : result) {
+            assertTrue(flight instanceof Flight, "Search result items should not be null");    
+        }
     }
 
     @Test
     public void testSearch2()
     {
-        assertTrue(fc.search("Reykjavík", "Akureyri") != null);
+        Flight[] result = fc.search("Reykjavík", "Akureyri");
+
+        assertNotNull(result, "Search result should not be null");
+        assertTrue(result.length > 0, "Search result should not be empty");
+
+        for (Flight flight : result) {
+            assertEquals("Reykjavík", flight.getDep(), "Search results should match");
+            assertEquals("Akureyri", flight.getArr(), "Search results should match");    
+        }
     }
 
     @Test
     public void testSearch3()
     {
-        assertTrue(fc.search("Reykjavík", new Date()) != null);
+        Date searchDate = new Date(); 
+        Flight[] result = fc.search("Reykjavík", searchDate);
+
+        assertNotNull(result, "Search result should not be null");
+        assertTrue(result.length > 0, "Search result should not be empty");
+
+        for (Flight flight : result) {
+            assertEquals("Reykjavík", flight.getDep(), "Search results should match");
+        }
     }
 
     @Test
     public void testSearch4()
     {
-        assertTrue(fc.search("Reykjavík", "Akureyri", new Date()) != null);
+        Date searchDate = new Date(); 
+        Flight[] result = fc.search("Reykjavík", "Akureyri", searchDate);
+
+        assertNotNull(result, "Search result should not be null");
+        assertTrue(result.length > 0, "Search result should not be empty");
+
+        for (Flight flight : result) {
+            assertEquals("Reykjavík", flight.getDep(), "Search results should match");
+            assertEquals("Akureyri", flight.getArr(), "Search results should match");    
+        }
     }
 
     @Test

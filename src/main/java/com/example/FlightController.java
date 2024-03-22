@@ -34,7 +34,7 @@ public class FlightController {
     private Flight[] getFlightsFromTo(String from, String to){
         List<Flight> matchingFlights = new ArrayList<>();
         if(from != null && to != null){
-            for (Flight flight : this.db.getFlights()) {
+            for (Flight flight : getFlights()) {
                 if (flight.dep.equals(from) && flight.arr.equals(to)) {
                     matchingFlights.add(flight);
                 }
@@ -44,10 +44,10 @@ public class FlightController {
     }
 
     private Flight[] getFlightsLocAndTime(String from, Date depTime){
-        return null;
+        return getFlights();
     }
 
     private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime){
-        return null;
+        return getFlights();
     }
 }
