@@ -8,69 +8,77 @@ public class Flight {
     Date depT;
     Date arrT;
     Integer seats;
+    Integer seatsAvailable;
     Double price;
 
     public Flight(){
-        this.dep = "Reykjavík";
-        this.arr = "Akureyri";
-        this.depT = new Date();
-        this.arrT = new Date();
-        this.seats = 10;
-        this.price = 15000.0;
+        dep = "Reykjavík";
+        arr = "Akureyri";
+        depT = new Date();
+        arrT = new Date();
+        seats = 10;
+        seatsAvailable = seats;
+        price = 15000.0;
     }
 
     public Flight(String D, String A){
-        this.dep = D;
-        this.arr = A;
-        this.depT = new Date();
-        this.arrT = new Date();
-        this.seats = 10;
-        this.price = 15000.0;
+        dep = D;
+        arr = A;
+        depT = new Date();
+        arrT = new Date();
+        seats = 10;
+        seatsAvailable = seats;
+        price = 15000.0;
     }
 
     public Flight(String D, String A, Integer s, Double p){
-        this.dep = D;
-        this.arr = A;
-        this.depT = new Date();
-        this.arrT = new Date();
-        this.seats = s;
-        this.price = p;
+        dep = D;
+        arr = A;
+        depT = new Date();
+        arrT = new Date();
+        seats = s;
+        seatsAvailable = seats;
+        price = p;
     }
 
     public Flight(String D, String A, Double p){
-        this.dep = D;
-        this.arr = A;
-        this.depT = new Date();
-        this.arrT = new Date();
-        this.seats = 10;
-        this.price = p;
+        dep = D;
+        arr = A;
+        depT = new Date();
+        arrT = new Date();
+        seats = 10;
+        seatsAvailable = seats;
+        price = p;
     }
 
     public Flight(String D, String A, Date DT, Date AT){
-        this.dep = D;
-        this.arr = A;
-        this.depT = DT;
-        this.arrT = AT;
-        this.seats = 10;
-        this.price = 15000.0;
+        dep = D;
+        arr = A;
+        depT = DT;
+        arrT = AT;
+        seats = 10;
+        seatsAvailable = seats;
+        price = 15000.0;
     }
 
     public Flight(String D, String A, Date DT, Date AT, Integer s){
-        this.dep = D;
-        this.arr = A;
-        this.depT = DT;
-        this.arrT = AT;
-        this.seats = s;
-        this.price = 15000.0;
+        dep = D;
+        arr = A;
+        depT = DT;
+        arrT = AT;
+        seats = s;
+        seatsAvailable = seats;
+        price = 15000.0;
     }
 
     public Flight(String D, String A, Integer s){
-        this.dep = D;
-        this.arr = A;
-        this.depT = new Date();
-        this.arrT = new Date();
-        this.seats = s;
-        this.price = 15000.0;
+        dep = D;
+        arr = A;
+        depT = new Date();
+        arrT = new Date();
+        seats = s;
+        seatsAvailable = seats;
+        price = 15000.0;
     }
 
     // Getter for departure location
@@ -129,5 +137,19 @@ public class Flight {
 
     public void setPrice(Double price){
         this.price = price;
+    }
+
+    public Integer getSeatsAvailable(){
+        return this.seatsAvailable;
+    }
+
+    public void setSeatsAvailable(Integer s){
+        this.seatsAvailable = s;
+    }
+
+    public void reserverASeat(){
+        if (seatsAvailable > 0) {
+            seatsAvailable--;
+        }
     }
 }

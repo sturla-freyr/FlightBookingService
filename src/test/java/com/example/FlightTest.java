@@ -48,4 +48,24 @@ public class FlightTest {
         testFlight.setSeats(42);
         assertEquals(42, testFlight.getSeats());
     }
+
+    @Test
+    void testSetGetAvailableSeats() {
+        testFlight.setSeatsAvailable(42);
+        assertEquals(42, testFlight.getSeatsAvailable());
+    }
+
+    @Test
+    void testReserveSeat(){
+        testFlight.setSeatsAvailable(43);
+        testFlight.reserverASeat();
+        assertEquals(42, testFlight.getSeatsAvailable());
+    }
+
+    @Test
+    void testAvailableSeatsZero(){
+        testFlight.setSeatsAvailable(0);
+        testFlight.reserverASeat();
+        assertEquals(0, testFlight.getSeatsAvailable());
+    }
 }

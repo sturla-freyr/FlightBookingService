@@ -127,6 +127,24 @@ public class FlightControllerTest {
     }
 
     @Test
+    public void canNotAddBadFlights(){
+        String dep = "Amsterdam";
+        String arr = "Rotterdam";
+        fc.addFlight(new Flight(dep, arr, -1.0));
+        
+        Flight[] results = fc.search(dep, arr);
+        
+        boolean found = false;
+        for (Flight flight : results) {
+            if (dep.equals(flight.getDep()) && arr.equals(flight.getArr())) {
+                found = true;
+                break; // Exit the loop early since we've found what we were looking for
+            }
+        }
+        assertFalse(found, "The added flight should be in the search results");
+    }
+
+    @Test
     public void canDeleteAFlight(){
         assertTrue(false);
     }
