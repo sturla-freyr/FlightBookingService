@@ -5,12 +5,10 @@ public class MockDB implements FlightDatabase{
     
     public MockDB(){
         
-        Flight f1 = new Flight("Reykjavík", "Akureyri");
-        Flight f2 = new Flight("Egilsstaðir", "Akureyri");
-        Flight f3 = new Flight("Akureyri", "Egilsstaðir");
-        this.MFS[0] = f1;
-        this.MFS[1] = f2;
-        this.MFS[2] = f3;
+        this.MFS[0] = new Flight("Reykjavík", "Akureyri");
+        this.MFS[1] = new Flight("Egilsstaðir", "Akureyri");
+        this.MFS[2] = new Flight("Akureyri", "Egilsstaðir");
+        
     }
 
     public Flight[] getFlights(){
