@@ -5,4 +5,5 @@ public class Booking {
     Flight flight;
     User user;
 
+
 }
