@@ -16,24 +16,25 @@ public class FlightController {
         return getFlights();
     }
 
-    public Flight[] search(String depLoc, String destLoc){
+    public Flight[] search(String depLoc, String destLoc) {
         return getFlightsFromTo(depLoc, destLoc);
     }
 
-    public Flight[] search(String depLoc, Date depTime){
+    public Flight[] search(String depLoc, Date depTime) {
         return getFlightsLocAndTime(depLoc, depTime);
     }
 
-    public Flight[] search(String depLoc, String destLoc, Date depTime){
+    public Flight[] search(String depLoc, String destLoc, Date depTime) {
         return getFlightsDepDestTime(depLoc, destLoc, depTime);
     }
 
-    private Flight[] getFlights(){
+    private Flight[] getFlights() {
         return db.getFlights();
     }
-    private Flight[] getFlightsFromTo(String from, String to){
+
+    private Flight[] getFlightsFromTo(String from, String to) {
         List<Flight> matchingFlights = new ArrayList<>();
-        if(from != null && to != null){
+        if (from != null && to != null) {
             for (Flight flight : getFlights()) {
                 if (flight.dep.equals(from) && flight.arr.equals(to)) {
                     matchingFlights.add(flight);
@@ -43,15 +44,24 @@ public class FlightController {
         return matchingFlights.toArray(new Flight[0]);
     }
 
-    private Flight[] getFlightsLocAndTime(String from, Date depTime){
+    private Flight[] getFlightsLocAndTime(String from, Date depTime) {
         return getFlights();
     }
 
-    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime){
+    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime) {
         return getFlights();
     }
 
-    public void addFlight(Flight f){};
-    public void deleteFlight(Flight f){};
-    public void changeFlight(){};
+    public void addFlight(Flight f) {
+    };
+
+    public void deleteFlight(Flight f) {
+    };
+
+    /*
+     * Er ekki eina breytingin sem við myndum gera, er að fækka sætum þegar bókun á
+     * sér stað?
+     */
+    public void changeFlight(Flight f) {
+    };
 }
