@@ -13,7 +13,7 @@ public class BookingController {
         Booking booking = new Booking(flight, user, seats);
         try {
 
-            BR.createBooking(booking);
+            BR.addBooking(booking);
         } catch (Exception e) {
             System.err.println("Bókun flugs mistókst");
         }

@@ -77,6 +77,34 @@ public class FlightRepo {
         return matchingFlights.toArray(new Flight[0]);
     }
 
+    public Flight findFlightById(int id) {
+        String sql = "SELECT * FROM Flights WHERE id = ?";
+        Flight foundFlight = null;
+
+        try {
+            ResultSet rs = Database.query(sql, id);
+
+            if (rs.next()) {
+                // Extract flight details from the ResultSet
+                String dep = rs.getString("dep");
+                String arr = rs.getString("arr");
+                Date depT = new Date(rs.getTimestamp("depT").getTime()); // Assuming depT is stored as a Timestamp
+                Date arrT = new Date(rs.getTimestamp("arrT").getTime()); // Assuming arrT is stored as a Timestamp
+                int seats = rs.getInt("seats");
+                int seatsAvailable = rs.getInt("seatsAvailable");
+                double price = rs.getDouble("price");
+                int flightId = rs.getInt("id"); // Assuming you have an ID field
+
+                // Create a new Flight object with the extracted data
+                foundFlight = new Flight(dep, arr, depT, arrT, seats, seatsAvailable, price, flightId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error finding flight: " + e.getMessage());
+        }
+
+        return foundFlight;
+    }
+
     public static Flight[] resultSetToFlights(ResultSet rs) throws SQLException {
         List<Flight> flights = new ArrayList<>();
         

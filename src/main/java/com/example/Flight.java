@@ -92,6 +92,16 @@ public class Flight {
         this.price = price;
     }
 
+    public Flight(String dep, String arr, Date depT, Date arrT, Integer seats, Integer seatsAvailable, Double price, int id) {
+        this.dep = dep;
+        this.arr = arr;
+        this.depT = depT;
+        this.arrT = arrT;
+        this.seats = seats;
+        this.seatsAvailable = seatsAvailable;
+        this.price = price;
+        this.Id = id;
+    }
     // Getter for departure location
     public String getDep() {
         return dep;

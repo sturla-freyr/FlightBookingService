@@ -57,4 +57,14 @@ public class Booking implements Service {
                                   flight.getDep() + " to " + flight.getArr() + " on " + flight.getDepT().toString();
     }
 
+    public Booking(String serviceName, Double servicePrice, String serviceDescription, Flight flight, User user, int seats) {
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.serviceDescription = serviceDescription;
+        this.flight = flight;
+        this.user = user;
+        this.seats = seats;
+    }
+    
+
 }

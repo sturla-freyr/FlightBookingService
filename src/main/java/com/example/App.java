@@ -14,8 +14,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/bookingApp-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 504, 709);
-        stage.setTitle("Sudoku");
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Flights");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
