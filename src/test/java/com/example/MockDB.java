@@ -1,6 +1,6 @@
 package com.example;
 
-public class MockDB implements FlightDatabase{
+public class MockDB{
     public Flight[] MFS = new Flight[3];
     
     public MockDB(){

@@ -28,7 +28,7 @@ public class Booking implements Service {
     };
 
     // When a new booking is made, it is initialized with the flight, user and
-    // number of seats.
+    // number of seats to reserve.
     public Booking(Flight flight, User user, int seats) {
         this.flight = flight;
         this.user = user;

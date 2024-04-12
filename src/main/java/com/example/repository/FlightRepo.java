@@ -16,12 +16,6 @@ public class FlightRepo {
 
     public FlightRepo(){
         flights = null;
-        try {
-            System.out.println(Database.getConnection()); 
-            System.out.println("yay");   
-        } catch (SQLException e) {
-            // TODO: handle exception
-        }
         
     }
     public Flight[] search() {
@@ -41,12 +35,14 @@ public class FlightRepo {
     }
 
     private Flight[] getFlights() {
+        Flight[] fs = null;
         try {
-            ResultSet rs = Database.query("SELECT * FROM Users;");            
+            ResultSet rs = Database.query("SELECT * FROM Flights;");
+            fs = resultSetToFlights(rs);           
         } catch (SQLException e) {
-            // TODO: handle exception
+            System.out.println(e.getMessage());
         }
-        return null;
+        return fs;
     }
 
     private Flight[] getFlightsFromTo(String from, String to) {
@@ -62,10 +58,44 @@ public class FlightRepo {
     }
 
     private Flight[] getFlightsLocAndTime(String from, Date depTime) {
-        return getFlights();
+        List<Flight> matchingFlights = new ArrayList<>();
+        for (Flight flight : getFlights()) {
+            if (flight.getDep().equals(from) && flight.getDepT().equals(depTime)) {
+                matchingFlights.add(flight);
+            }
+        }
+        return matchingFlights.toArray(new Flight[0]);
+    }
+    
+    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime) {
+        List<Flight> matchingFlights = new ArrayList<>();
+        for (Flight flight : getFlights()) {
+            if (flight.getDep().equals(depLoc) && flight.getArr().equals(destLoc) && flight.getDepT().equals(depTime)) {
+                matchingFlights.add(flight);
+            }
+        }
+        return matchingFlights.toArray(new Flight[0]);
     }
 
-    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime) {
-        return getFlights();
+    public static Flight[] resultSetToFlights(ResultSet rs) throws SQLException {
+        List<Flight> flights = new ArrayList<>();
+        
+        while (rs.next()) {
+            String dep = rs.getString("dep");
+            String arr = rs.getString("arr");
+            Date depT = new Date(rs.getTimestamp("depT").getTime()); // Convert SQL Timestamp to java.util.Date
+            Date arrT = new Date(rs.getTimestamp("arrT").getTime()); // Convert SQL Timestamp to java.util.Date
+            Integer seats = rs.getInt("seats");
+            Integer seatsAvailable = rs.getInt("seatsAvailable");
+            Double price = rs.getDouble("price");
+
+            Flight flight = new Flight(dep, arr, depT, arrT, seats, seatsAvailable, price);
+            flights.add(flight);
+        }
+        
+        // Convert the list to an array and return it
+        Flight[] flightArray = new Flight[flights.size()];
+        flights.toArray(flightArray);
+        return flightArray;
     }
 }
