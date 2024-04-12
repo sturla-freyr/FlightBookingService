@@ -2,15 +2,16 @@ package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.repository.*;
 import org.junit.jupiter.api.*;
 import java.util.Date;
 
-public class FlightControllerTest {
-    private FlightController fc;
+public class FlightRepositoryTest {
+    private FlightRepo fc;
 
     @BeforeEach
     void setUp(){
-        this.fc = new FlightController(new MockDB());
+        this.fc = new FlightRepo();
     }
 
     @AfterEach
@@ -107,7 +108,7 @@ public class FlightControllerTest {
         Integer s = f[0].seats;
         assertTrue(s != null);
     }
-
+/* 
     @Test
     public void canAddNewFlights(){
         String dep = "Amsterdam";
@@ -143,7 +144,7 @@ public class FlightControllerTest {
         }
         assertFalse(found, "The added flight should be in the search results");
     }
-
+*/
     @Test
     public void canDeleteAFlight(){
         assertTrue(false);

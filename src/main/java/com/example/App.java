@@ -7,12 +7,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.example.database.Database;
+import com.example.repository.*;
 public class App extends Application {
-
-    private static void testDatabaseConnection() {
-        // Directly call the main method of Database class to test the connection
-        Database.main(null); 
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -29,7 +25,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        testDatabaseConnection();
+        Database.initialize();
+        FlightRepo fr = new FlightRepo();
         launch(args);
     }
 }

@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class Database {
@@ -167,19 +166,6 @@ public class Database {
 
 
     public static void main(String[] args) {
-
         initialize();
-        try {
-            ResultSet rs = query("SELECT name FROM sqlite_master WHERE type='table';");
-            while (rs.next()) {
-                // Retrieve the first column's value in each row (the table name)
-                String tableName = rs.getString(1);
-                System.out.println(tableName);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        
-    
     }
 }
