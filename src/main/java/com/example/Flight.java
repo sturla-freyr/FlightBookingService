@@ -10,6 +10,7 @@ public class Flight {
     Integer seats;
     Integer seatsAvailable;
     Double price;
+    int Id;
 
     public Flight(){
         dep = "Reykjavík";
@@ -161,5 +162,13 @@ public class Flight {
         if (seatsAvailable > 0) {
             seatsAvailable--;
         }
+    }
+
+    public int getFlightID(){
+        return this.Id;
+    }
+
+    public void setFlightID(int id){
+        this.Id = id;
     }
 }

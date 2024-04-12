@@ -13,7 +13,7 @@ public class FlightController {
         fs = fr.search();
     }
 
-    public void searchFlights(Object... params) {
+    public Flight[] searchFlights(Object... params) {
         if (params.length == 0) {
             // No parameters: fetch all flights
             fs = fr.search();
@@ -30,5 +30,6 @@ public class FlightController {
             // Parameters did not match any known combination
             throw new IllegalArgumentException("Invalid parameters for newFlights");
         }
+        return fs;
     }
 }

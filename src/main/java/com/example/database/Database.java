@@ -73,6 +73,13 @@ public class Database {
         } catch (SQLException e){
             System.out.println(e.getMessage());            
         }
+
+        String dsql3 = "DROP TABLE Users";
+        try{
+            executeUpdate(dsql3);
+        } catch (SQLException e){
+            System.out.println(e.getMessage());            
+        }
         
         String sql = """
             CREATE TABLE IF NOT EXISTS Flights (
@@ -151,7 +158,8 @@ public class Database {
 
         String sql4 = """
             CREATE TABLE IF NOT EXISTS Users (
-                userID INTEGER PRIMARY KEY AUTOINCREMENT
+                userID INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT
             );
          """;           
 
