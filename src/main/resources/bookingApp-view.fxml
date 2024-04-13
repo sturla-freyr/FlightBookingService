@@ -11,12 +11,12 @@
 <AnchorPane prefHeight="804.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppController">
    <children>
       <Label alignment="CENTER" prefHeight="33.0" prefWidth="527.0" text="Flug" />
-      <ListView fx:id="fxFlights" prefHeight="360.0" prefWidth="345.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="46.0" />
+      <ListView fx:id="fxFlights" onMouseClicked="#handleMouseClick" prefHeight="360.0" prefWidth="345.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="46.0" />
       <HBox layoutX="62.0" layoutY="711.0" prefHeight="71.0" prefWidth="424.0">
          <children>
             <ComboBox fx:id="fxCombo" onAction="#depOnClick" prefHeight="25.0" prefWidth="74.0" promptText="Fra:">
             </ComboBox>
-            <ComboBox fx:id="fxArrivalDest" prefHeight="25.0" prefWidth="75.0" promptText="Til">
+            <ComboBox fx:id="fxArrivalDest" onAction="#destOnClick" prefHeight="25.0" prefWidth="75.0" promptText="Til">
             </ComboBox>
             <DatePicker prefHeight="25.0" prefWidth="117.0" promptText="Dagsetning">
             </DatePicker>

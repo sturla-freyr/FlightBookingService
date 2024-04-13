@@ -12,11 +12,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 public class AppController implements Initializable {
     static ObservableList<Flight> observableList = FXCollections.observableArrayList();
 
     Flight[] array;
+    private String from = "";
+    private String to = "";
+
+    private FlightController fc;
 
     @FXML
     ComboBox<String> fxCombo;
@@ -31,8 +36,7 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fxCombo.setPromptText("auli");
-        FlightController fc = new FlightController();
+        fc = new FlightController();
         array = fc.searchFlights();
         putFlightsToView(array);
         fxFlights.setItems(observableList);
@@ -50,6 +54,7 @@ public class AppController implements Initializable {
         // Optionally, you can set the prompt text for the ComboBox
         fxCombo.setPromptText("Veldu brottfararstað");
         fxArrivalDest.setPromptText("Veldu áfangastað");
+
   }
 
   private void putFlightsToView(Flight[] arr){
@@ -60,7 +65,29 @@ public class AppController implements Initializable {
 
   @FXML
   private void depOnClick(ActionEvent event){
-    System.out.println("auli");
+      from = fxCombo.getValue();
+      if(to != ""){
+        observableList.clear();
+        array = fc.searchFlights(from, to);
+        putFlightsToView(array);
+        fxFlights.setItems(observableList);
+      }
   }
+
+  @FXML
+  private void destOnClick(ActionEvent event){
+    to = fxArrivalDest.getValue();
+    if(from != ""){
+      System.out.println("from: " + from + " to: " + to);
+      observableList.clear();
+      array = fc.searchFlights(from, to);
+      putFlightsToView(array);
+      fxFlights.setItems(observableList);
+    }
+  }
+
+  @FXML public void handleMouseClick(MouseEvent arg0) {
+    System.out.println("clicked on " + fxFlights.getSelectionModel().getSelectedItem());
+}
 
 }
