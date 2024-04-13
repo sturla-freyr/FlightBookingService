@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+     <VBox layoutX="504.0" layoutY="232.0" prefHeight="200.0" prefWidth="298.0">
+        <children>
+           <TextField prefHeight="25.0" prefWidth="214.0" promptText="Sláðu inn kennitölu:">
+              <VBox.margin>
+                 <Insets right="100.0" />
+              </VBox.margin>
+           </TextField>
+           <TextField promptText="Sláðu inn nafn:">
+              <VBox.margin>
+                 <Insets right="100.0" top="10.0" />
+              </VBox.margin>
+           </TextField>
+           <TextField promptText="Sláðu inn netfang:">
+              <VBox.margin>
+                 <Insets right="100.0" top="10.0" />
+              </VBox.margin>
+           </TextField>
+           <Button mnemonicParsing="false" text="Bóka">
+              <VBox.margin>
+                 <Insets top="20.0" />
+              </VBox.margin>
+           </Button>
+           <Button mnemonicParsing="false" text="Hætta við">
+              <VBox.margin>
+                 <Insets top="10.0" />
+              </VBox.margin>
+           </Button>
+        </children>
+     </VBox>
+     <Label layoutX="504.0" layoutY="176.0" prefHeight="40.0" prefWidth="158.0" text="Sláðu inn upplýsingar:">
+        <font>
+           <Font size="16.0" />
+        </font>
+     </Label>
+     <VBox prefHeight="432.0" prefWidth="387.0">
+        <children>
+           <HBox prefHeight="59.0" prefWidth="387.0">
+              <children>
+                 <Label prefHeight="60.0" prefWidth="150.0" text="Brottfarastaður:">
+                    <font>
+                       <Font name="Avenir Heavy Oblique" size="18.0" />
+                    </font>
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                 </Label>
+                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+              </children>
+           </HBox>
+           <HBox prefHeight="70.0" prefWidth="387.0">
+              <children>
+                 <Label prefHeight="60.0" prefWidth="150.0" text="Áfangastaður:">
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                    <font>
+                       <Font name="Avenir Heavy Oblique" size="18.0" />
+                    </font>
+                 </Label>
+                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+              </children>
+           </HBox>
+           <HBox prefHeight="69.0" prefWidth="387.0">
+              <children>
+                 <Label prefHeight="60.0" prefWidth="150.0" text="Dagsetning:">
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                    <font>
+                       <Font name="Avenir Heavy Oblique" size="18.0" />
+                    </font>
+                 </Label>
+                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+              </children>
+           </HBox>
+           <HBox prefHeight="72.0" prefWidth="387.0">
+              <children>
+                 <Label prefHeight="60.0" prefWidth="150.0" text="Fjöldi sæta:">
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                    <font>
+                       <Font name="Avenir Heavy Oblique" size="18.0" />
+                    </font>
+                 </Label>
+                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+              </children>
+           </HBox>
+           <HBox prefHeight="82.0" prefWidth="387.0">
+              <children>
+                 <Label prefHeight="60.0" prefWidth="150.0" text="Verð:">
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                    <font>
+                       <Font name="Avenir Heavy" size="18.0" />
+                    </font>
+                 </Label>
+                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+              </children>
+           </HBox>
+        </children>
+     </VBox>
+  </children>
+</AnchorPane>
+

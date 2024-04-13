@@ -181,4 +181,12 @@ public class Flight {
     public void setFlightID(int id){
         this.Id = id;
     }
+
+    @Override
+    public String toString() {
+        // Customize how the Flight object is displayed in the ListView
+        return "Dep: " + dep +
+               ", Dest: " + arr +
+               ", Flight Time: " + depT;
+    }
 }
