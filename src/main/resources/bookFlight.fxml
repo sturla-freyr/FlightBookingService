@@ -33,7 +33,7 @@
                  <Insets top="20.0" />
               </VBox.margin>
            </Button>
-           <Button mnemonicParsing="false" text="Hætta við">
+           <Button fx:id="fxHaetta" onAction="#backToPrevScene" mnemonicParsing="false" text="Hætta við">
               <VBox.margin>
                  <Insets top="10.0" />
               </VBox.margin>

@@ -17,7 +17,7 @@
             </ComboBox>
             <ComboBox fx:id="fxArrivalDest" onAction="#destOnClick" prefHeight="25.0" prefWidth="75.0" promptText="Til">
             </ComboBox>
-            <DatePicker prefHeight="25.0" prefWidth="117.0" promptText="Dagsetning">
+            <DatePicker fx:id="fxDatePicker" prefHeight="25.0" prefWidth="117.0" promptText="Dagsetning">
             </DatePicker>
          </children>
       </HBox>
