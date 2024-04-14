@@ -9,42 +9,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-     <VBox layoutX="504.0" layoutY="232.0" prefHeight="200.0" prefWidth="298.0">
+     <VBox layoutX="415.0" layoutY="99.0" prefHeight="200.0" prefWidth="298.0">
         <children>
-           <TextField prefHeight="25.0" prefWidth="214.0" promptText="Sláðu inn kennitölu:">
+           <TextField fx:id="fxNafn" prefHeight="25.0" prefWidth="214.0" promptText="Nafn farþega:">
               <VBox.margin>
                  <Insets right="100.0" />
               </VBox.margin>
            </TextField>
-           <TextField promptText="Sláðu inn nafn:">
+           <TextField fx:id="fxKT" promptText="Kennitala farþega:">
               <VBox.margin>
                  <Insets right="100.0" top="10.0" />
               </VBox.margin>
            </TextField>
-           <TextField promptText="Sláðu inn netfang:">
+           <TextField promptText="Netfang farþega:">
               <VBox.margin>
                  <Insets right="100.0" top="10.0" />
               </VBox.margin>
            </TextField>
-           <Button mnemonicParsing="false" text="Bóka">
-              <VBox.margin>
-                 <Insets top="20.0" />
-              </VBox.margin>
-           </Button>
-           <Button fx:id="fxHaetta" onAction="#backToPrevScene" mnemonicParsing="false" text="Hætta við">
-              <VBox.margin>
-                 <Insets top="10.0" />
-              </VBox.margin>
-           </Button>
+            <HBox prefHeight="100.0" prefWidth="96.0">
+               <children>
+                 <Button fx:id="fxGeraBokun" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#fxKlaraBokun" prefHeight="25.0" prefWidth="102.0" text="Bóka" />
+                 <Button fx:id="fxHaetta" mnemonicParsing="false" onAction="#backToPrevScene" prefHeight="25.0" prefWidth="96.0" text="Hætta við" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
         </children>
      </VBox>
-     <Label layoutX="504.0" layoutY="176.0" prefHeight="40.0" prefWidth="158.0" text="Sláðu inn upplýsingar:">
-        <font>
-           <Font size="16.0" />
-        </font>
-     </Label>
      <VBox prefHeight="432.0" prefWidth="387.0">
         <children>
            <HBox prefHeight="59.0" prefWidth="387.0">
@@ -57,10 +54,13 @@
                        <Insets left="10.0" />
                     </HBox.margin>
                  </Label>
-                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+                 <Label fx:id="fxBrottfor" prefHeight="60.0" prefWidth="200.0" text="xxxx">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
               </children>
            </HBox>
-           <HBox prefHeight="70.0" prefWidth="387.0">
+           <HBox prefHeight="57.0" prefWidth="382.0">
               <children>
                  <Label prefHeight="60.0" prefWidth="150.0" text="Áfangastaður:">
                     <HBox.margin>
@@ -70,10 +70,13 @@
                        <Font name="Avenir Heavy Oblique" size="18.0" />
                     </font>
                  </Label>
-                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+                 <Label fx:id="fxAfangi" prefHeight="60.0" prefWidth="200.0" text="xxxx">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
               </children>
            </HBox>
-           <HBox prefHeight="69.0" prefWidth="387.0">
+           <HBox prefHeight="60.0" prefWidth="386.0">
               <children>
                  <Label prefHeight="60.0" prefWidth="150.0" text="Dagsetning:">
                     <HBox.margin>
@@ -83,10 +86,13 @@
                        <Font name="Avenir Heavy Oblique" size="18.0" />
                     </font>
                  </Label>
-                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+                 <Label fx:id="fxDags" prefHeight="60.0" prefWidth="200.0" text="xxxx">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
               </children>
            </HBox>
-           <HBox prefHeight="72.0" prefWidth="387.0">
+           <HBox prefHeight="54.0" prefWidth="394.0">
               <children>
                  <Label prefHeight="60.0" prefWidth="150.0" text="Fjöldi sæta:">
                     <HBox.margin>
@@ -96,10 +102,13 @@
                        <Font name="Avenir Heavy Oblique" size="18.0" />
                     </font>
                  </Label>
-                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+                 <Label prefHeight="60.0" prefWidth="200.0" text="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
               </children>
            </HBox>
-           <HBox prefHeight="82.0" prefWidth="387.0">
+           <HBox prefHeight="59.0" prefWidth="381.0">
               <children>
                  <Label prefHeight="60.0" prefWidth="150.0" text="Verð:">
                     <HBox.margin>
@@ -109,11 +118,18 @@
                        <Font name="Avenir Heavy" size="18.0" />
                     </font>
                  </Label>
-                 <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="xxxx" />
+                 <Label fx:id="fxVerd" prefHeight="60.0" prefWidth="200.0" text="xxxx">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
               </children>
            </HBox>
         </children>
      </VBox>
+     <Label layoutX="415.0" layoutY="45.0" prefHeight="40.0" prefWidth="190.0" text="Upplýsingar um farþega">
+        <font>
+           <Font size="16.0" />
+        </font>
+     </Label>
   </children>
 </AnchorPane>
-

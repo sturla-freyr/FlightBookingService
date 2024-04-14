@@ -3,26 +3,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="804.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppController">
+<AnchorPane prefHeight="513.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AppController">
    <children>
-      <ListView fx:id="fxFlights" onMouseClicked="#handleMouseClick" prefHeight="360.0" prefWidth="345.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="46.0" />
-      <HBox layoutX="62.0" layoutY="711.0" prefHeight="71.0" prefWidth="424.0">
+      <ListView fx:id="fxFlights" onMouseClicked="#handleMouseClick" prefHeight="295.0" prefWidth="599.0" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="46.0" />
+      <HBox layoutX="62.0" layoutY="410.0" prefHeight="71.0" prefWidth="429.0">
          <children>
-            <ComboBox fx:id="fxCombo" onAction="#depOnClick" prefHeight="25.0" prefWidth="74.0" promptText="Fra:">
+            <ComboBox fx:id="fxCombo" onAction="#depOnClick" prefHeight="25.0" prefWidth="161.0" promptText="Frá:">
             </ComboBox>
-            <ComboBox fx:id="fxArrivalDest" onAction="#destOnClick" prefHeight="25.0" prefWidth="75.0" promptText="Til">
+            <ComboBox fx:id="fxArrivalDest" onAction="#destOnClick" prefHeight="25.0" prefWidth="160.0" promptText="Til:">
             </ComboBox>
-            <DatePicker fx:id="fxDatePicker" prefHeight="25.0" prefWidth="117.0" promptText="Dagsetning">
+            <DatePicker fx:id="fxDatePicker" prefHeight="25.0" prefWidth="127.0" promptText="Dagsetning">
             </DatePicker>
          </children>
       </HBox>
-      <Button fx:id="fxEndursetja" onMouseClicked="#endursetjaOnClick" alignment="CENTER" layoutX="486.0" layoutY="747.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Endursetja leit" />
-      <Button fx:id="fxBoka" onAction="#bokaScene" layoutX="732.0" layoutY="46.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="75.0" text="Bóka" />
-      <Button layoutX="486.0" layoutY="711.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Leita" />
+      <Button fx:id="fxEndursetja" alignment="CENTER" layoutX="491.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#endursetjaOnClick" prefHeight="25.0" prefWidth="125.0" text="Öll flug" />
+      <Button fx:id="fxBoka" layoutX="597.0" layoutY="302.0" mnemonicParsing="false" onAction="#bokaScene" prefHeight="39.0" prefWidth="75.0" text="Bóka" />
    </children>
 </AnchorPane>
