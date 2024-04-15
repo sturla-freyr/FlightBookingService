@@ -1,65 +1,75 @@
 package com.example.database;
 
-import java.time.LocalDateTime;
-import java.sql.Timestamp;
-import java.util.Random;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Random;
 
 public class Database {
 
     private static final String URL = "jdbc:sqlite:database.db";
-
-    // Get a database connection
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL);
-    }
+    private static Connection conn = null;
 
     /**
-     * Execute a SQL query with parameters.
-     *
-     * @param sql    SQL query with placeholders.
-     * @param params Parameters to replace placeholders in the SQL query.
-     * @return ResultSet containing the query results.
-     * @throws SQLException If an error occurs during query execution.
+     * Open a database connection.
      */
-    public static ResultSet query(String sql, Object... params) throws SQLException {
-        Connection conn = getConnection(); // Get connection
-        PreparedStatement pstmt = conn.prepareStatement(sql); // Prepare statement
-
-        // Set parameters
-        for (int i = 0; i < params.length; i++) {
-            pstmt.setObject(i + 1, params[i]);
+    public static void openConnection() throws SQLException {
+        if (conn == null || conn.isClosed()) {
+            conn = DriverManager.getConnection(URL);
         }
-
-        return pstmt.executeQuery(); // Execute query
     }
 
     /**
-     * Execute an SQL DDL or DML command that does not return a ResultSet.
-     *
-     * @param sql    SQL command with placeholders.
-     * @param params Parameters to replace placeholders in the SQL command.
-     * @throws SQLException If an error occurs during command execution.
+     * Close the database connection.
      */
-    public static void executeUpdate(String sql, Object... params) throws SQLException {
-        try (Connection conn = getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public static void closeConnection() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Failed to close the database connection: " + e.getMessage());
+            }
+        }
+    }
 
-            // Set parameters
+    // Modify your existing methods to use the static `conn` field.
+    public static void executeUpdate(String sql, Object... params) throws SQLException {
+        openConnection();  // Ensure connection is open
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 pstmt.setObject(i + 1, params[i]);
             }
-
             pstmt.executeUpdate();
+        } finally {
+            closeConnection();  // Close connection after the operation
         }
     }
 
-    public static void initialize() {
+    public static ResultSet query(String sql, Object... params) throws SQLException {
+        openConnection();  // Ensure connection is open
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+            if (pstmt != null) pstmt.close();
+            closeConnection();  // Ensure connection is closed on error
+            throw e;
+        }
+        // Connection should not be closed here if ResultSet is still open and being used outside this method
+    }
+
+    public static void initialize() throws SQLException {
+        
+        openConnection();
+        
         String dsql = "DROP TABLE Flights";
         try {
             executeUpdate(dsql);
@@ -107,7 +117,7 @@ public class Database {
         String[] destinations = { "Reykjavik", "London", "Akureyri", "New York" };
         LocalDateTime currentTime = LocalDateTime.now();
         Integer seats = 200;
-        Integer seatsAvailable = 150;
+        Integer seatsAvailable = 200;
         Double price = 15000.00;
         Random random = new Random();
 
@@ -171,9 +181,15 @@ public class Database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        closeConnection();
     }
 
     public static void main(String[] args) {
-        initialize();
+        try {
+            initialize();   
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

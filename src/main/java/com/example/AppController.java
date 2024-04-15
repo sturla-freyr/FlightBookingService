@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,16 +17,20 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.stage.Stage;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import javafx.scene.control.DatePicker;
 
+import com.example.database.Database;
+import com.example.repository.BookingRepo;
+import com.example.repository.UserRepo;
+import com.example.repository.FlightRepo;
 
 
 public class AppController implements Initializable {
   static ObservableList<Flight> observableList = FXCollections.observableArrayList();
+
+  UserRepo users = new UserRepo();
+  BookingRepo books = new BookingRepo();
+  FlightRepo flights = new FlightRepo();
 
   LocalDate fd = LocalDate.now();
   int flag = 0;
@@ -77,6 +82,8 @@ public class AppController implements Initializable {
   @FXML
   DatePicker fxDatePicker;
 
+  int fxSeats = 5;
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     if (flag == 0) {
@@ -120,7 +127,7 @@ public class AppController implements Initializable {
   }
 
   @FXML
-  private void bokaScene(ActionEvent event) throws IOException {
+  private void bokaScene(ActionEvent event) {
     if (chosenFlight != null) {
       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/bookFlight.fxml"));
       fxmlLoader.setController(this); // Use the same controller
@@ -150,26 +157,36 @@ public class AppController implements Initializable {
   }
 
   @FXML
-  private void fxKlaraBokun() {
-    // User user = new User(fxNafn.getText());
-    // Booking booking = new Booking(chosenFlight, user, 1);
-    //Timestamp t = convertDatePickerToTimestamp(fxDatePicker);
-
-
+  private void fxKlaraBokun() throws SQLException {
+    int user = users.addUser(fxNafn.getText());
+    User us = null;
+    try {
+      us = users.findUserById(user); 
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
     
+    int seatsToBook = fxSeats;//.getInt();
+    Booking booking = new Booking(chosenFlight, us, seatsToBook);
+    if(chosenFlight.getSeatsAvailable() >= seatsToBook){
+      Database.openConnection();
+      while(seatsToBook > 0){
+        chosenFlight.reserveASeat();
+        seatsToBook--;
+        System.out.println(chosenFlight.getSeatsAvailable());
+      }
+      try {
+        System.out.println(chosenFlight.getFlightID() + " hæ");
+        flights.updateFlight(chosenFlight);
+        
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+      Database.closeConnection();
+      books.addBooking(booking);
+
+    }
   }
-
-  public Timestamp convertDatePickerToTimestamp(DatePicker datePicker) {
-    // Assuming the datePicker has a date selected
-    LocalDate localDate = datePicker.getValue();
-    // Convert LocalDate to java.util.Date
-    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    // Convert java.util.Date to java.sql.Timestamp
-    Timestamp timestamp = new Timestamp(date.getTime());
-    
-    return timestamp;
-}
-
 
   @FXML
   private void depOnClick(ActionEvent event) {

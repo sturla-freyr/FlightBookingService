@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import com.example.database.Database;
-import com.example.repository.*;
 public class App extends Application {
 
     @Override
@@ -21,8 +20,12 @@ public class App extends Application {
         stage.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        Database.initialize();
+    public static void main(String[] args){
+        try {
+            Database.initialize();    
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         launch(args);
     }

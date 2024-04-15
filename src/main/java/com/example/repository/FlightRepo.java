@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 import java.time.LocalDateTime;
 
-public class FlightRepo {
+public class FlightRepo{
     
     Flight[] flights;
     
@@ -31,7 +31,7 @@ public class FlightRepo {
         return getFlightsLocAndTime(depLoc, depTime);
     }
 
-    public Flight[] search(String depLoc, String destLoc, LocalDateTime depTime) {
+    public Flight[] search(String depLoc, String destLoc, LocalDateTime depTime)  {
         return getFlightsDepDestTime(depLoc, destLoc, depTime);
     }
 
@@ -46,7 +46,7 @@ public class FlightRepo {
         return fs;
     }
 
-    private Flight[] getFlightsFromTo(String from, String to) {
+    private Flight[] getFlightsFromTo(String from, String to)  {
         List<Flight> matchingFlights = new ArrayList<>();
         if (from != null && to != null) {
             for (Flight flight : getFlights()) {
@@ -132,8 +132,9 @@ public class FlightRepo {
             Integer seats = rs.getInt("seats");
             Integer seatsAvailable = rs.getInt("seatsAvailable");
             Double price = rs.getDouble("price");
+            int flightID = rs.getInt("flightID");  // Retrieve the flightID from the ResultSet
 
-            Flight flight = new Flight(dep, arr, depT, arrT, seats, seatsAvailable, price);
+            Flight flight = new Flight(dep, arr, depT, arrT, seats, seatsAvailable, price, flightID);
             flights.add(flight);
         }
         
@@ -141,5 +142,22 @@ public class FlightRepo {
         Flight[] flightArray = new Flight[flights.size()];
         flights.toArray(flightArray);
         return flightArray;
+    }
+
+    public void updateFlight(Flight f){
+        int id = f.getFlightID();
+        int sa = f.getSeatsAvailable() - 1;
+        String sql ="""
+            UPDATE Flights
+            SET seatsAvailable = ?
+            WHERE flightID = ?;
+        """;
+
+        try {
+            Database.executeUpdate(sql, id, sa);    
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
 }

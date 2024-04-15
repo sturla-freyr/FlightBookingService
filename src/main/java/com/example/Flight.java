@@ -170,7 +170,7 @@ public class Flight {
         this.seatsAvailable = s;
     }
 
-    public void reserverASeat() {
+    public void reserveASeat() {
         if (seatsAvailable > 0) {
             seatsAvailable--;
         }
@@ -189,6 +189,6 @@ public class Flight {
         // Customize how the Flight object is displayed in the ListView
         return "Frá: " + dep +
                 ", Til: " + arr +
-                ", Dagsetning: " + depT + ", Sætafjöldi: " + seats;
+                ", Dagsetning: " + depT + ", Sætafjöldi: " + seatsAvailable;
     }
 }

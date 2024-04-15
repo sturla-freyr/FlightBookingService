@@ -2,6 +2,7 @@ package com.example;
 
 import java.time.LocalDateTime;
 import com.example.repository.FlightRepo;
+import java.sql.SQLException;
 
 
 public class FlightController {
