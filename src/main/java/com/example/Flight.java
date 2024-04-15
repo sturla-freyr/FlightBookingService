@@ -12,7 +12,7 @@ public class Flight {
     Double price;
     int Id;
 
-    public Flight(){
+    public Flight() {
         dep = "Reykjavík";
         arr = "Akureyri";
         depT = new Date();
@@ -22,7 +22,7 @@ public class Flight {
         price = 15000.0;
     }
 
-    public Flight(String D, String A){
+    public Flight(String D, String A) {
         dep = D;
         arr = A;
         depT = new Date();
@@ -32,7 +32,7 @@ public class Flight {
         price = 15000.0;
     }
 
-    public Flight(String D, String A, Integer s, Double p){
+    public Flight(String D, String A, Integer s, Double p) {
         dep = D;
         arr = A;
         depT = new Date();
@@ -42,7 +42,7 @@ public class Flight {
         price = p;
     }
 
-    public Flight(String D, String A, Double p){
+    public Flight(String D, String A, Double p) {
         dep = D;
         arr = A;
         depT = new Date();
@@ -52,7 +52,7 @@ public class Flight {
         price = p;
     }
 
-    public Flight(String D, String A, Date DT, Date AT){
+    public Flight(String D, String A, Date DT, Date AT) {
         dep = D;
         arr = A;
         depT = DT;
@@ -62,7 +62,7 @@ public class Flight {
         price = 15000.0;
     }
 
-    public Flight(String D, String A, Date DT, Date AT, Integer s){
+    public Flight(String D, String A, Date DT, Date AT, Integer s) {
         dep = D;
         arr = A;
         depT = DT;
@@ -72,7 +72,7 @@ public class Flight {
         price = 15000.0;
     }
 
-    public Flight(String D, String A, Integer s){
+    public Flight(String D, String A, Integer s) {
         dep = D;
         arr = A;
         depT = new Date();
@@ -92,7 +92,8 @@ public class Flight {
         this.price = price;
     }
 
-    public Flight(String dep, String arr, Date depT, Date arrT, Integer seats, Integer seatsAvailable, Double price, int id) {
+    public Flight(String dep, String arr, Date depT, Date arrT, Integer seats, Integer seatsAvailable, Double price,
+            int id) {
         this.dep = dep;
         this.arr = arr;
         this.depT = depT;
@@ -102,6 +103,7 @@ public class Flight {
         this.price = price;
         this.Id = id;
     }
+
     // Getter for departure location
     public String getDep() {
         return dep;
@@ -152,33 +154,41 @@ public class Flight {
         this.seats = seats;
     }
 
-    public Double getPrice(){
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price){
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getSeatsAvailable(){
+    public Integer getSeatsAvailable() {
         return this.seatsAvailable;
     }
 
-    public void setSeatsAvailable(Integer s){
+    public void setSeatsAvailable(Integer s) {
         this.seatsAvailable = s;
     }
 
-    public void reserverASeat(){
+    public void reserverASeat() {
         if (seatsAvailable > 0) {
             seatsAvailable--;
         }
     }
 
-    public int getFlightID(){
+    public int getFlightID() {
         return this.Id;
     }
 
-    public void setFlightID(int id){
+    public void setFlightID(int id) {
         this.Id = id;
+    }
+
+    @Override
+    public String toString() {
+        // Customize how the Flight object is displayed in the ListView
+        return "Frá: " + dep +
+                ", Til: " + arr +
+                ", Dagsetning: " + depT + ", Sætafjöldi: " + seats;
     }
 }
