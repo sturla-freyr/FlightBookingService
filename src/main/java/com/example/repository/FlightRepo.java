@@ -5,9 +5,10 @@ import com.example.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+
+import java.time.LocalDateTime;
 
 public class FlightRepo {
     
@@ -26,11 +27,11 @@ public class FlightRepo {
         return getFlightsFromTo(depLoc, destLoc);
     }
 
-    public Flight[] search(String depLoc, Date depTime) {
+    public Flight[] search(String depLoc, LocalDateTime depTime) {
         return getFlightsLocAndTime(depLoc, depTime);
     }
 
-    public Flight[] search(String depLoc, String destLoc, Date depTime) {
+    public Flight[] search(String depLoc, String destLoc, LocalDateTime depTime) {
         return getFlightsDepDestTime(depLoc, destLoc, depTime);
     }
 
@@ -57,17 +58,24 @@ public class FlightRepo {
         return matchingFlights.toArray(new Flight[0]);
     }
 
-    private Flight[] getFlightsLocAndTime(String from, Date depTime) {
+    private Flight[] getFlightsLocAndTime(String from, LocalDateTime depLocalDate) {
         List<Flight> matchingFlights = new ArrayList<>();
+        
         for (Flight flight : getFlights()) {
-            if (flight.getDep().equals(from) && flight.getDepT().equals(depTime)) {
+            // Convert flight's depT (Date) to LocalDate
+            //String depTString = rs.getString("depT");
+            //LocalDateTime depT = LocalDateTime.parse(depTString);
+            //LocalDateTime flightDate = flight.getDepT().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            System.out.println(flight.getDep());
+            System.out.println(depLocalDate);
+            if (flight.getDep().equals(from) && flight.getDepT().equals(depLocalDate)) {
                 matchingFlights.add(flight);
             }
         }
         return matchingFlights.toArray(new Flight[0]);
     }
     
-    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, Date depTime) {
+    private Flight[] getFlightsDepDestTime(String depLoc, String destLoc, LocalDateTime depTime) {
         List<Flight> matchingFlights = new ArrayList<>();
         for (Flight flight : getFlights()) {
             if (flight.getDep().equals(depLoc) && flight.getArr().equals(destLoc) && flight.getDepT().equals(depTime)) {
@@ -88,8 +96,12 @@ public class FlightRepo {
                 // Extract flight details from the ResultSet
                 String dep = rs.getString("dep");
                 String arr = rs.getString("arr");
-                Date depT = new Date(rs.getTimestamp("depT").getTime()); // Assuming depT is stored as a Timestamp
-                Date arrT = new Date(rs.getTimestamp("arrT").getTime()); // Assuming arrT is stored as a Timestamp
+                
+                String depTString = rs.getString("depT");
+                String arrTString = rs.getString("arrT");
+                LocalDateTime depT = LocalDateTime.parse(depTString);
+                LocalDateTime arrT = LocalDateTime.parse(arrTString);
+                
                 int seats = rs.getInt("seats");
                 int seatsAvailable = rs.getInt("seatsAvailable");
                 double price = rs.getDouble("price");
@@ -111,8 +123,12 @@ public class FlightRepo {
         while (rs.next()) {
             String dep = rs.getString("dep");
             String arr = rs.getString("arr");
-            Date depT = new Date(rs.getTimestamp("depT").getTime()); // Convert SQL Timestamp to java.util.Date
-            Date arrT = new Date(rs.getTimestamp("arrT").getTime()); // Convert SQL Timestamp to java.util.Date
+
+            String depTString = rs.getString("depT");
+            String arrTString = rs.getString("arrT");
+            LocalDateTime depT = LocalDateTime.parse(depTString);
+            LocalDateTime arrT = LocalDateTime.parse(arrTString);
+
             Integer seats = rs.getInt("seats");
             Integer seatsAvailable = rs.getInt("seatsAvailable");
             Double price = rs.getDouble("price");

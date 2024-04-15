@@ -17,9 +17,17 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.stage.Stage;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import javafx.scene.control.DatePicker;
+
+
+
 public class AppController implements Initializable {
   static ObservableList<Flight> observableList = FXCollections.observableArrayList();
 
+  LocalDate fd = LocalDate.now();
   int flag = 0;
   Flight[] array;
   static Flight chosenFlight = null;
@@ -98,13 +106,16 @@ public class AppController implements Initializable {
         Date selected = java.sql.Date.valueOf(selectedDate);
         System.out.println("Selected Date: " + selected);
         // You can perform any action with the selected date here
+        fd = newValue;
       }
     });
   }
 
   private void putFlightsToView(Flight[] arr) {
     for (int i = 0; i < arr.length; i++) {
-      observableList.add(arr[i]);
+      if(arr[i].getDepT().toLocalDate().compareTo(fd) >= 0){
+        observableList.add(arr[i]);
+      }
     }
   }
 
@@ -142,7 +153,23 @@ public class AppController implements Initializable {
   private void fxKlaraBokun() {
     // User user = new User(fxNafn.getText());
     // Booking booking = new Booking(chosenFlight, user, 1);
+    //Timestamp t = convertDatePickerToTimestamp(fxDatePicker);
+
+
+    
   }
+
+  public Timestamp convertDatePickerToTimestamp(DatePicker datePicker) {
+    // Assuming the datePicker has a date selected
+    LocalDate localDate = datePicker.getValue();
+    // Convert LocalDate to java.util.Date
+    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    // Convert java.util.Date to java.sql.Timestamp
+    Timestamp timestamp = new Timestamp(date.getTime());
+    
+    return timestamp;
+}
+
 
   @FXML
   private void depOnClick(ActionEvent event) {

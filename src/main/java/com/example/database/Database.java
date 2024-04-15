@@ -1,6 +1,6 @@
 package com.example.database;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.sql.Timestamp;
 import java.util.Random;
 
@@ -86,8 +86,8 @@ public class Database {
                        flightID INTEGER PRIMARY KEY AUTOINCREMENT,
                        dep VARCHAR(255),
                        arr VARCHAR(255),
-                       depT TIMESTAMP,
-                       arrT TIMESTAMP,
+                       depT STRING,
+                       arrT STRING,
                        seats INT,
                        seatsAvailable INT,
                        price DOUBLE PRECISION
@@ -105,7 +105,7 @@ public class Database {
 
         // Array of possible destinations
         String[] destinations = { "Reykjavik", "London", "Akureyri", "New York" };
-        long currentTime = System.currentTimeMillis();
+        LocalDateTime currentTime = LocalDateTime.now();
         Integer seats = 200;
         Integer seatsAvailable = 150;
         Double price = 15000.00;
@@ -125,11 +125,11 @@ public class Database {
 
             // For demonstration, adding one hour to each subsequent flight's departure and
             // arrival times
-            long depTime = currentTime + (i * 60 * 60 * 1000); // 60 * 60 * 1000 ms in an hour
-            long arrTime = depTime + (7 * 60 * 60 * 1000); // Assuming a 7-hour flight duration for simplicity
+            LocalDateTime depTime = currentTime.plusHours(i);
+            LocalDateTime arrTime = depTime.plusHours(7); // Assuming a 7-hour flight duration for simplicity
 
-            Timestamp depT = new Timestamp(depTime);
-            Timestamp arrT = new Timestamp(arrTime);
+            String depT = depTime.toString();
+            String arrT = arrTime.toString();
 
             try {
                 executeUpdate(sql2, dep, arr, depT, arrT, seats, seatsAvailable, price);

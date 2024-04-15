@@ -1,12 +1,12 @@
 package com.example;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Flight {
     String dep;
     String arr;
-    Date depT;
-    Date arrT;
+    LocalDateTime depT;
+    LocalDateTime arrT;
     Integer seats;
     Integer seatsAvailable;
     Double price;
@@ -15,8 +15,8 @@ public class Flight {
     public Flight() {
         dep = "Reykjavík";
         arr = "Akureyri";
-        depT = new Date();
-        arrT = new Date();
+        depT = LocalDateTime.now();
+        arrT = LocalDateTime.now();
         seats = 10;
         seatsAvailable = seats;
         price = 15000.0;
@@ -25,8 +25,8 @@ public class Flight {
     public Flight(String D, String A) {
         dep = D;
         arr = A;
-        depT = new Date();
-        arrT = new Date();
+        depT = LocalDateTime.now();
+        arrT = LocalDateTime.now();
         seats = 10;
         seatsAvailable = seats;
         price = 15000.0;
@@ -35,8 +35,8 @@ public class Flight {
     public Flight(String D, String A, Integer s, Double p) {
         dep = D;
         arr = A;
-        depT = new Date();
-        arrT = new Date();
+        depT = LocalDateTime.now();
+        arrT = LocalDateTime.now();
         seats = s;
         seatsAvailable = seats;
         price = p;
@@ -45,14 +45,14 @@ public class Flight {
     public Flight(String D, String A, Double p) {
         dep = D;
         arr = A;
-        depT = new Date();
-        arrT = new Date();
+        depT = LocalDateTime.now();
+        arrT = LocalDateTime.now();
         seats = 10;
         seatsAvailable = seats;
         price = p;
     }
 
-    public Flight(String D, String A, Date DT, Date AT) {
+    public Flight(String D, String A, LocalDateTime DT, LocalDateTime AT) {
         dep = D;
         arr = A;
         depT = DT;
@@ -62,7 +62,7 @@ public class Flight {
         price = 15000.0;
     }
 
-    public Flight(String D, String A, Date DT, Date AT, Integer s) {
+    public Flight(String D, String A, LocalDateTime DT, LocalDateTime AT, Integer s) {
         dep = D;
         arr = A;
         depT = DT;
@@ -75,14 +75,14 @@ public class Flight {
     public Flight(String D, String A, Integer s) {
         dep = D;
         arr = A;
-        depT = new Date();
-        arrT = new Date();
+        depT = LocalDateTime.now();
+        arrT = LocalDateTime.now();
         seats = s;
         seatsAvailable = seats;
         price = 15000.0;
     }
 
-    public Flight(String dep, String arr, Date depT, Date arrT, Integer seats, Integer seatsAvailable, Double price) {
+    public Flight(String dep, String arr, LocalDateTime depT, LocalDateTime arrT, Integer seats, Integer seatsAvailable, Double price) {
         this.dep = dep;
         this.arr = arr;
         this.depT = depT;
@@ -92,7 +92,7 @@ public class Flight {
         this.price = price;
     }
 
-    public Flight(String dep, String arr, Date depT, Date arrT, Integer seats, Integer seatsAvailable, Double price,
+    public Flight(String dep, String arr, LocalDateTime depT, LocalDateTime arrT, Integer seats, Integer seatsAvailable, Double price,
             int id) {
         this.dep = dep;
         this.arr = arr;
@@ -125,22 +125,22 @@ public class Flight {
     }
 
     // Getter for departure time
-    public Date getDepT() {
+    public LocalDateTime getDepT() {
         return depT;
     }
 
     // Setter for departure time
-    public void setDepT(Date depT) {
+    public void setDepT(LocalDateTime depT) {
         this.depT = depT;
     }
 
     // Getter for arrival time
-    public Date getArrT() {
+    public LocalDateTime getArrT() {
         return arrT;
     }
 
     // Setter for arrival time
-    public void setArrT(Date arrT) {
+    public void setArrT(LocalDateTime arrT) {
         this.arrT = arrT;
     }
 
