@@ -1,28 +1,28 @@
 package com.example;
 
-import java.io.IOException;
+import com.example.database.Database;
+import com.example.repository.BookingRepo;
+import com.example.repository.FlightRepo;
+import com.example.repository.UserRepo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.sql.SQLException;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.input.*;
-import javafx.stage.Stage;
-import javafx.scene.control.DatePicker;
-
-import com.example.database.Database;
-import com.example.repository.BookingRepo;
-import com.example.repository.UserRepo;
-import com.example.repository.FlightRepo;
 
 
 public class AppController implements Initializable {
@@ -40,6 +40,9 @@ public class AppController implements Initializable {
   private String to = "";
   private Scene prevScene = null;
   private FlightController fc;
+  private int fjoldi;
+  private double heildarfjoldi;
+  private String output;
   @FXML
   ComboBox<String> fxCombo;
 
@@ -82,7 +85,13 @@ public class AppController implements Initializable {
   @FXML
   DatePicker fxDatePicker;
 
-  int fxSeats = 5;
+  @FXML
+  ComboBox <Integer> fxSeats;
+
+  @FXML
+  Label fxSeatText;
+
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -104,6 +113,10 @@ public class AppController implements Initializable {
       // Optionally, you can set the prompt text for the ComboBox
       fxCombo.setPromptText("Veldu brottfararstað");
       fxArrivalDest.setPromptText("Veldu áfangastað");
+      if (fxSeats.getItems().isEmpty()) {
+        List<Integer> seatOptions = Arrays.asList(1, 2, 3, 4);
+        fxSeats.getItems().addAll(seatOptions);
+      }
     }
     flag = 1;
 
@@ -152,8 +165,9 @@ public class AppController implements Initializable {
   private void insertData() {
     fxBrottfor.setText(chosenFlight.getDep());
     fxAfangi.setText(chosenFlight.getArr());
-    fxVerd.setText(chosenFlight.getPrice().toString());
+    fxVerd.setText((heildarfjoldi) + "kr");
     fxDags.setText(chosenFlight.getDepT().toString());
+    fxSeatText.setText(String.valueOf(fjoldi));
   }
 
   @FXML
@@ -161,24 +175,25 @@ public class AppController implements Initializable {
     int user = users.addUser(fxNafn.getText());
     User us = null;
     try {
-      us = users.findUserById(user); 
+      us = users.findUserById(user);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    
-    int seatsToBook = fxSeats;//.getInt();
-    Booking booking = new Booking(chosenFlight, us, seatsToBook);
-    if(chosenFlight.getSeatsAvailable() >= seatsToBook){
+
+
+
+    Booking booking = new Booking(chosenFlight, us, fjoldi);
+    if(chosenFlight.getSeatsAvailable() >= fjoldi){
       Database.openConnection();
-      while(seatsToBook > 0){
+      while(fjoldi > 0){
         chosenFlight.reserveASeat();
-        seatsToBook--;
+        fjoldi--;
         System.out.println(chosenFlight.getSeatsAvailable());
       }
       try {
         System.out.println(chosenFlight.getFlightID() + " hæ");
         flights.updateFlight(chosenFlight);
-        
+
       } catch (Exception e) {
         System.out.println(e.getMessage());
       }
@@ -187,7 +202,13 @@ public class AppController implements Initializable {
 
     }
   }
+  @FXML
+  private void SelectSeats(ActionEvent event) {
+    fjoldi = fxSeats.getValue();
+    heildarfjoldi =  (chosenFlight.getPrice() * fjoldi);
 
+
+  }
   @FXML
   private void depOnClick(ActionEvent event) {
     from = fxCombo.getValue();

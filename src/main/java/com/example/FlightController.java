@@ -1,21 +1,21 @@
 package com.example;
 
-import java.time.LocalDateTime;
 import com.example.repository.FlightRepo;
-import java.sql.SQLException;
+
+import java.time.LocalDateTime;
 
 
 public class FlightController {
 
     FlightRepo fr;
-    Flight[] fs;    
+    Flight[] fs;
 
     public FlightController() {
         fr = new FlightRepo();
         fs = fr.search();
     }
 
-    
+
     public Flight[] searchFlights(Object... params) {
         if (params.length == 0) {
             // No parameters: fetch all flights
