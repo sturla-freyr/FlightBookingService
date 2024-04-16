@@ -76,9 +76,6 @@ public class AppController implements Initializable {
   TextField fxNafn;
 
   @FXML
-  TextField fxKT;
-
-  @FXML
   Button fxGeraBokun;
 
   @FXML
@@ -104,8 +101,7 @@ public class AppController implements Initializable {
 
   @FXML
   Label fxSeatText;
-  @FXML
-  TextField fxNF;
+
   @FXML
   Label fxTime;
 
@@ -152,7 +148,6 @@ public class AppController implements Initializable {
 
     Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e ->
             fxTimeT.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
-
     ),
             new KeyFrame(Duration.seconds(1))
     );
@@ -165,7 +160,6 @@ public class AppController implements Initializable {
     String Dags2 = dateFormat.format(date2);
     fxTime.setText(Dags2);
 
-
     fxDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         LocalDate selectedDate = newValue;
@@ -174,8 +168,6 @@ public class AppController implements Initializable {
         fd = newValue;
       }
     });
-
-
   }
 
   private void putFlightsToView(Flight[] arr) {
@@ -185,7 +177,6 @@ public class AppController implements Initializable {
       }
     }
   }
-
 
   @FXML
   private void bokaScene(ActionEvent event) {
@@ -211,10 +202,8 @@ public class AppController implements Initializable {
     else {
       Alert alert = new Alert(Alert.AlertType.ERROR, "Veldu flug til að halda áfram");
       alert.showAndWait();
-
     }
     fxstadfestVbox.setVisible(false);
-
   }
 
   private void insertData() {
@@ -231,11 +220,9 @@ public class AppController implements Initializable {
     DateFormat dateFormat = new SimpleDateFormat("dd. MMMM. yyyy");
     String Dags = dateFormat.format(date2);
     fxDags.setText(Dags);
-
   }
 
   private void insertVboxData() {
-
       fxNafnStadfest.setText(fxNafn.getText());
 
       if (fxNafnStadfest.getText().isEmpty()) {
@@ -272,13 +259,11 @@ public class AppController implements Initializable {
       Database.closeConnection();
       books.addBooking(booking);
     }
-
     fxbookVbox.setVisible(false);
     fxstadfestVbox.setVisible(true);
     insertVboxData();
-
-
   }
+
   @FXML
   private void SelectSeats(ActionEvent event) {
     fjoldi = fxSeats.getValue();
@@ -288,10 +273,8 @@ public class AppController implements Initializable {
     StringBuilder sb = new StringBuilder();
     Formatter formatter = new Formatter(sb, Locale.US);
     formatter.format(" %(,.1f", heildarfjoldi);
-
-
-
   }
+
   @FXML
   private void depOnClick(ActionEvent event) {
     from = fxCombo.getValue();
@@ -325,7 +308,6 @@ public class AppController implements Initializable {
   @FXML
   public void handleMouseClick(MouseEvent arg0) {
     chosenFlight = fxFlights.getSelectionModel().getSelectedItem();
-
   }
 
   @FXML
@@ -338,7 +320,4 @@ public class AppController implements Initializable {
       System.out.println("No previous scene available");
     }
   }
-
-
-
 }
