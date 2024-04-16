@@ -26,7 +26,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ListView fx:id="fxFlights" layoutX="65.0" layoutY="60.0" onMouseClicked="#handleMouseClick" prefHeight="281.0" prefWidth="521.0" style="-fx-background-color: #f5fbff;" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="60.0">
+      <ListView fx:id="fxFlights" layoutX="71.0" layoutY="72.0" onMouseClicked="#handleMouseClick" prefHeight="274.0" prefWidth="505.0" style="-fx-background-color: #f5fbff;" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="72.0">
          <effect>
             <DropShadow>
                <color>
@@ -55,7 +55,7 @@
                <HBox.margin>
                   <Insets left="25.0" />
                </HBox.margin></ComboBox>
-            <Button fx:id="fxEndursetja" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#endursetjaOnClick" prefHeight="25.0" prefWidth="90.0" text="Öll flug">
+            <Button fx:id="fxEndursetja" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#endursetjaOnClick" prefHeight="27.0" prefWidth="97.0" text="Öll flug">
                <effect>
                   <DropShadow>
                      <color>

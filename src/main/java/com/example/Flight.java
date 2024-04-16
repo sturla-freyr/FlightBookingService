@@ -1,6 +1,7 @@
 package com.example;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Flight {
     String dep;
@@ -184,11 +185,14 @@ public class Flight {
         this.Id = id;
     }
 
+
+
     @Override
     public String toString() {
         // Customize how the Flight object is displayed in the ListView
-        return "Frá: " + dep +
-                ", Til: " + arr +
-                ", Dagsetning: " + depT + ", Sætafjöldi: " + seatsAvailable;
+        return "Frá:  " + " " +  dep +" ," +   " " + " " + " " + " " +" " +
+                "Til:  " + " " + arr + ", " + " " +" " + " " + " " +" " +
+                "Dagsetning:  " + " " + " " + depT.format(DateTimeFormatter.ofPattern("dd. MMMM. yyyy")) +" ," + " " +" " +" " +" " +
+                "Sætafjöldi: " + " " + seatsAvailable;
     }
 }
