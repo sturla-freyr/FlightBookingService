@@ -20,6 +20,9 @@ public class FlightController {
         if (params.length == 0) {
             // No parameters: fetch all flights
             fs = fr.search();
+        } else if (params.length == 1 && params[0] instanceof String) {
+            // Only departure location is provided;
+            fs = fr.search((String) params[0]);
         } else if (params.length == 2 && params[0] instanceof String && params[1] instanceof String) {
             // Departure and arrival locations
             fs = fr.search((String) params[0], (String) params[1]);

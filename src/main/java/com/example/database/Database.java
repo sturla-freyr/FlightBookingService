@@ -106,9 +106,8 @@ public class Database {
 
         try {
             executeUpdate(sql);
-            System.out.println("Flight Table created or already exists.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error creating Flight table: "+e.getMessage());
         }
 
         String sql2 = "INSERT INTO Flights(dep, arr, depT, arrT, seats, seatsAvailable, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -163,9 +162,8 @@ public class Database {
 
         try {
             executeUpdate(sql3);
-            System.out.println("BookingTable created or already exists.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error creating Booking table: "+e.getMessage());
         }
 
         String sql4 = """
@@ -177,9 +175,8 @@ public class Database {
 
         try {
             executeUpdate(sql4);
-            System.out.println("UserTable created or already exists.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error creating User table: "+e.getMessage());
         }
 
         closeConnection();
