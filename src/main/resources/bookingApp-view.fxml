@@ -64,7 +64,7 @@
                   </DropShadow>
                </effect>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font size="14.0" />
                </font>
                <HBox.margin>
                   <Insets left="60.0" />
@@ -83,7 +83,7 @@
       </ComboBox>
       <Button fx:id="fxBoka" layoutX="451.0" layoutY="450.0" mnemonicParsing="false" onAction="#bokaScene" prefHeight="45.0" prefWidth="179.0" text="Bóka">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
          <effect>
             <DropShadow />
@@ -98,5 +98,18 @@
             </DropShadow>
          </effect>
       </DatePicker>
+      <Label fx:id="fxTime" layoutX="6.0" layoutY="3.0" prefHeight="30.0" prefWidth="110.0" text="Label" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="fxTimeT" layoutX="6.0" layoutY="33.0" prefHeight="26.0" prefWidth="104.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="3.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>

@@ -107,7 +107,10 @@ public class AppController implements Initializable {
   @FXML
   TextField fxNF;
   @FXML
-  Label fxClock;
+  Label fxTime;
+
+  @FXML
+  Label fxTimeT;
 
   @FXML
   VBox fxbookVbox;
@@ -117,6 +120,7 @@ public class AppController implements Initializable {
 
   @FXML
   Label fxNafnStadfest;
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,6 +149,23 @@ public class AppController implements Initializable {
     }
     flag = 1;
 
+
+    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e ->
+            fxTimeT.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+
+    ),
+            new KeyFrame(Duration.seconds(1))
+    );
+    clock.setCycleCount(Animation.INDEFINITE);
+    clock.play();
+
+    LocalDateTime localDateTime = LocalDateTime.now();
+    Date date2 = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    DateFormat dateFormat = new SimpleDateFormat("dd. MMMM. yyyy");
+    String Dags2 = dateFormat.format(date2);
+    fxTime.setText(Dags2);
+
+
     fxDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         LocalDate selectedDate = newValue;
@@ -153,6 +174,8 @@ public class AppController implements Initializable {
         fd = newValue;
       }
     });
+
+
   }
 
   private void putFlightsToView(Flight[] arr) {
@@ -162,6 +185,7 @@ public class AppController implements Initializable {
       }
     }
   }
+
 
   @FXML
   private void bokaScene(ActionEvent event) {
@@ -207,6 +231,7 @@ public class AppController implements Initializable {
     DateFormat dateFormat = new SimpleDateFormat("dd. MMMM. yyyy");
     String Dags = dateFormat.format(date2);
     fxDags.setText(Dags);
+
   }
 
   private void insertVboxData() {
@@ -314,18 +339,6 @@ public class AppController implements Initializable {
     }
   }
 
-  @FXML
-  public void initialize() {
-    BreakIterator time = null;
-    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e ->
-            time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-    ),
-            new KeyFrame(Duration.seconds(1))
-    );
-    clock.setCycleCount(Animation.INDEFINITE);
-    clock.play();
 
-
-  }
 
 }
