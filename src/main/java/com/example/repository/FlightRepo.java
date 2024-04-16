@@ -22,6 +22,10 @@ public class FlightRepo{
     public Flight[] search() {
         return getFlights();
     }
+    
+    public Flight[] search(String depLoc){
+        return getFlightsByDepartureLocation(depLoc);
+    }
 
     public Flight[] search(String depLoc, String destLoc) {
         return getFlightsFromTo(depLoc, destLoc);
@@ -46,11 +50,22 @@ public class FlightRepo{
         return fs;
     }
 
+    private Flight[] getFlightsByDepartureLocation(String from){
+        List<Flight> matchingFlights = new ArrayList<>();
+
+        for (Flight flight : getFlights()) {
+            if (flight.getDep().equals(from)) {
+                matchingFlights.add(flight);
+            }
+        }
+        return matchingFlights.toArray(new Flight[0]);
+    }
+
     private Flight[] getFlightsFromTo(String from, String to)  {
         List<Flight> matchingFlights = new ArrayList<>();
         if (from != null && to != null) {
             for (Flight flight : getFlights()) {
-                if (flight.getDep().equals(from) && flight.getArr().equals(to)) {
+                if (flight.getDep().equals(from)) {
                     matchingFlights.add(flight);
                 }
             }
@@ -62,12 +77,6 @@ public class FlightRepo{
         List<Flight> matchingFlights = new ArrayList<>();
         
         for (Flight flight : getFlights()) {
-            // Convert flight's depT (Date) to LocalDate
-            //String depTString = rs.getString("depT");
-            //LocalDateTime depT = LocalDateTime.parse(depTString);
-            //LocalDateTime flightDate = flight.getDepT().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            System.out.println(flight.getDep());
-            System.out.println(depLocalDate);
             if (flight.getDep().equals(from) && flight.getDepT().equals(depLocalDate)) {
                 matchingFlights.add(flight);
             }

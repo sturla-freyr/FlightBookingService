@@ -15,25 +15,6 @@ public class UserRepo {
         users = null;
     }
 
-/* *   public User findUserById(int id) throws SQLException {
-        User user = null;
-        String sql = "SELECT * FROM Users WHERE userID = ?";
-
-        try {
-            ResultSet rs = Database.query(sql, id);
-            if (rs.next()) {
-                System.out.println("RS = "+ rs.toString());
-                System.out.println(rs.getString("name"));
-                user = new User(rs.getInt("userID"), rs.getString("name"));
-            }   else {System.out.println("No Users found with ID");}
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
-        }
-        
-        return user;
-    }
-*/
-
     public User findUserById(int id) throws SQLException{
         User user = null;
         String sql = "SELECT * FROM Users WHERE userID = ?";
@@ -42,9 +23,7 @@ public class UserRepo {
         try {
             rs = Database.query(sql, id);
             if (rs.next()) {
-                System.out.println("RS = " + rs.toString());
-                String name = rs.getString("name"); // Get the name after confirming there's a row
-                System.out.println(name);
+                String name = rs.getString("name");
                 user = new User(rs.getInt("userID"), name);
             } else {
                 System.out.println("No Users found with ID: " + id);

@@ -149,7 +149,6 @@ public class AppController implements Initializable {
       if (newValue != null) {
         LocalDate selectedDate = newValue;
         Date selected = java.sql.Date.valueOf(selectedDate);
-        System.out.println("Selected Date: " + selected);
         // You can perform any action with the selected date here
         fd = newValue;
       }
@@ -238,10 +237,8 @@ public class AppController implements Initializable {
       while(fjoldi > 0){
         chosenFlight.reserveASeat();
         fjoldi--;
-        System.out.println(chosenFlight.getSeatsAvailable());
       }
       try {
-        System.out.println(chosenFlight.getFlightID() + " hæ");
         flights.updateFlight(chosenFlight);
 
       } catch (Exception e) {
@@ -293,7 +290,6 @@ public class AppController implements Initializable {
   private void destOnClick(ActionEvent event) {
     to = fxArrivalDest.getValue();
     if (from != "") {
-      System.out.println("from: " + from + " to: " + to);
       observableList.clear();
       array = fc.searchFlights(from, to);
       putFlightsToView(array);
@@ -303,7 +299,6 @@ public class AppController implements Initializable {
 
   @FXML
   public void handleMouseClick(MouseEvent arg0) {
-    System.out.println("clicked on " + fxFlights.getSelectionModel().getSelectedItem());
     chosenFlight = fxFlights.getSelectionModel().getSelectedItem();
 
   }
